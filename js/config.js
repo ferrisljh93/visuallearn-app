@@ -13,6 +13,6 @@
  * the journey before deployment.
  */
 window.VL_CONFIG = {
-  SUPABASE_URL: "https://YOUR-PROJECT-REF.supabase.co",
-  SUPABASE_ANON_KEY: "YOUR-ANON-PUBLIC-KEY"
+  SUPABASE_URL: "https://glzfhfcnrwlanyjvmrfy.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_bD40Pr76iSv_Oo4iMMHlcg_MUC5yl6H"
 };
