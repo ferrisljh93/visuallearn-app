@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VisualLearn — study visually, from your own material</title>
+<meta name="description" content="VisualLearn turns study material into topics, visual labs, practice questions and flashcards.">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="previewBanner" class="banner" hidden>
+  LOCAL PREVIEW MODE — Supabase is not configured, so progress is stored only in this browser (localStorage) and accounts are not real. See README.md to deploy. Nothing here is a live service.
+</div>
+<div id="fatalBanner" class="banner banner-error" hidden></div>
+
+<!-- ============ AUTH VIEW ============ -->
+<main id="authView" class="auth-wrap" hidden>
+  <section class="auth-card">
+    <div class="brand"><span class="brand-mark">VL</span><span class="brand-name">VisualLearn</span></div>
+    <h1>Sign in</h1>
+    <p class="muted">Use the account you created for VisualLearn testing. Your progress is private to your account.</p>
+    <form id="authForm">
+      <label>Email <input type="email" id="authEmail" required autocomplete="email"></label>
+      <label>Password <input type="password" id="authPassword" required autocomplete="current-password"></label>
+      <div class="auth-actions">
+        <button type="submit" id="signInBtn" class="btn primary">Sign in</button>
+        <button type="button" id="signUpBtn" class="btn">Create account</button>
+      </div>
+      <p id="authMsg" class="msg" role="status"></p>
+    </form>
+    <p class="fineprint">Live AI analysis of uploaded documents is <strong>not enabled</strong> in this build. The study journey uses pre-verified content, labelled as such.</p>
+  </section>
+</main>
+
+<!-- ============ APP SHELL ============ -->
+<div id="appShell" class="shell" hidden>
+  <aside class="rail" aria-label="Primary">
+    <div class="brand"><span class="brand-mark">VL</span><span class="brand-name">VisualLearn</span></div>
+    <nav>
+      <p class="nav-group">Learn</p>
+      <a href="#/today" data-route="today">Today</a>
+      <a href="#/library" data-route="library">Library</a>
+      <a href="#/upload" data-route="upload">Upload</a>
+      <p class="nav-group">Study</p>
+      <a href="#/study" data-route="study">Study Workspace</a>
+      <a href="#/map" data-route="map">Topic Map</a>
+      <a href="#/lab" data-route="lab">Visual Lab</a>
+      <a href="#/practice" data-route="practice">Practice</a>
+      <a href="#/flashcards" data-route="flashcards">Flashcards <span id="dueBadge" class="badge" hidden></span></a>
+      <p class="nav-group">Progress</p>
+      <a href="#/weaknesses" data-route="weaknesses">Weaknesses</a>
+      <a href="#/settings" data-route="settings">Settings</a>
+    </nav>
+    <div class="rail-foot">
+      <span id="userEmail" class="muted small"></span>
+      <button id="signOutBtn" class="btn small">Sign out</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <span class="brand mobile-only"><span class="brand-mark">VL</span></span>
+      <h2 id="viewTitle">Today</h2>
+      <span class="tag tag-pre">PRE-VERIFIED CONTENT</span>
+    </header>
+
+    <section id="view-today" class="view"></section>
+    <section id="view-library" class="view"></section>
+    <section id="view-upload" class="view"></section>
+    <section id="view-study" class="view"></section>
+    <section id="view-map" class="view"></section>
+    <section id="view-lab" class="view"></section>
+    <section id="view-practice" class="view"></section>
+    <section id="view-flashcards" class="view"></section>
+    <section id="view-weaknesses" class="view"></section>
+    <section id="view-settings" class="view"></section>
+
+    <footer class="foot muted small">
+      VisualLearn testing build. Live AI processing and payments are disabled. Uploaded documents are stored only; analysis is <strong>not enabled</strong>.
+    </footer>
+  </div>
+
+  <nav class="tabbar" aria-label="Mobile">
+    <a href="#/today" data-route="today">Today</a>
+    <a href="#/library" data-route="library">Library</a>
+    <a href="#/lab" data-route="lab">Lab</a>
+    <a href="#/practice" data-route="practice">Practice</a>
+    <a href="#/flashcards" data-route="flashcards">Cards</a>
+    <a href="#/settings" data-route="settings">Settings</a>
+  </nav>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/content.js"></script>
+<script src="js/fsrs.js"></script>
+<script src="js/store.js"></script>
+<script src="js/labs.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
