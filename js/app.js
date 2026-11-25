@@ -129,8 +129,9 @@
       stat("Practice attempts", state.attempts.length) +
       stat("Practice accuracy", acc == null ? "—" : acc + "%") +
       stat("Flashcards due", due) +
-      stat("Documents stored", 1 + state.uploads.length) +
+      stat("Upload records (name & size only)", state.uploads.length) +
       "</div>" +
+      '<p class="muted small">Upload records hold a file\'s name and size only. The file itself is not stored, not indexed and not analysed in this build — the pre-verified demo document above is the study material.</p>' +
       (weak.length ? '<div class="card"><h3>Weakest topic so far</h3><p><strong>' + esc(weak[0].topic) + '</strong> — ' + weak[0].pct + '% correct from ' + weak[0].total + ' attempts. <a href="#/weaknesses">See weaknesses</a> · <a href="#/practice">Practise</a></p></div>' : "") +
       '<div class="card"><h3>Start here</h3><p><a class="btn primary" href="#/study">Open the Study Workspace</a> <a class="btn" href="#/lab">Go to the Visual Lab</a></p></div>';
     function stat(k, v) { return '<div class="card"><div class="muted small">' + k + '</div><div class="stat">' + v + "</div></div>"; }
@@ -139,14 +140,15 @@
   function vLibrary() {
     var el = $("#view-library");
     var ups = state.uploads.map(function (u) {
-      return "<tr><td>" + esc(u.file_name || u.name) + '</td><td>' + esc(u.file_size != null ? Math.round(u.file_size / 1024) + " KB" : (u.size != null ? Math.round(u.size / 1024) + " KB" : "—")) + '</td><td><span class="tag tag-off">ANALYSIS NOT ENABLED</span></td></tr>';
+      return "<tr><td>" + esc(u.file_name || u.name) + '</td><td>' + esc(u.file_size != null ? Math.round(u.file_size / 1024) + " KB" : (u.size != null ? Math.round(u.size / 1024) + " KB" : "—")) + '</td><td><span class="tag tag-off">RECORD ONLY — FILE NOT STORED, NOT ANALYSED</span></td></tr>';
     }).join("");
     el.innerHTML =
       '<div class="card"><h3>' + esc(DOC.title) + '</h3><p class="muted">' + esc(DOC.subject) + ' · 4 topics · 6 practice questions · 6 flashcards · <span class="tag tag-pre">PRE-VERIFIED</span></p>' +
       '<p><a class="btn primary" href="#/study">Open Study Workspace</a> <a class="btn" href="#/map">Topic Map</a></p></div>' +
       '<div class="card"><h3>Your uploads</h3>' +
       (ups ? "<table><tr><th>File</th><th>Size</th><th>Status</th></tr>" + ups + "</table>" :
-        '<p class="muted">No uploads yet. Uploads are stored with a record only — live AI analysis is not enabled in this build, so no topics or questions are generated from them.</p>') +
+        '<p class="muted">No uploads yet. Only a record of an upload (file name and size) is kept — the file itself is not stored, indexed or analysed in this build, so no topics or questions are generated from uploads.</p>') +
+      '<p class="muted small">What an upload means in this build: (1) a metadata record of the file name and size is kept against your account; (2) the file itself is <strong>not stored</strong> — its contents never leave your browser; (3) it is <strong>not indexed</strong> for search or tutoring; (4) it is <strong>not analysed</strong> — no topics, questions or flashcards are generated from it.</p>' +
       '<p><a class="btn" href="#/upload">Upload a document</a></p></div>';
   }
 
@@ -155,7 +157,7 @@
     el.innerHTML =
       '<div class="card"><h3>Upload a document</h3>' +
       '<p><span class="tag tag-off">LIVE AI ANALYSIS NOT ENABLED</span></p>' +
-      '<p class="muted">In this testing build your file\'s name and size are recorded against your account so the upload step of the journey works end-to-end. The file content is <strong>not</strong> analysed and no topics, questions or flashcards are generated from it. The pre-verified demo document in your Library is the study material for this build.</p>' +
+      '<p class="muted">In this testing build only your file\'s name and size are recorded against your account, so the upload step of the journey works end-to-end. The file itself is <strong>not</strong> uploaded or stored — its contents never leave your browser — and it is not indexed or analysed, so no topics, questions or flashcards are generated from it. The pre-verified demo document in your Library is the study material for this build.</p>' +
       '<label>Choose a file (PDF or text) <input type="file" id="upFile" accept=".pdf,.txt,.md"></label>' +
       '<button class="btn primary" id="upBtn">Record upload</button> <span class="msg" id="upMsg"></span></div>';
     $("#upBtn").addEventListener("click", function () {
@@ -164,7 +166,7 @@
       var rec = { file_name: f.name, file_size: f.size, name: f.name, size: f.size, status: "stored_analysis_disabled" };
       store.addUpload(rec).then(function () {
         state.uploads.push(rec);
-        $("#upMsg").innerHTML = '<span class="ok">Recorded.</span> Analysis is not enabled — see your Library.';
+        $("#upMsg").innerHTML = '<span class="ok">Recorded (name and size only).</span> The file itself was not stored, indexed or analysed — see your Library.';
         ctx.markJourney("upload");
       }).catch(showErr);
     });
