@@ -41,6 +41,7 @@
   /* ---------------- auth ---------------- */
   function showAuth() {
     $("#authView").hidden = false; $("#appShell").hidden = true;
+    $("#authMsg").textContent = "";
     if (store.mode === "local") $("#previewBanner").hidden = false;
   }
   function showApp() {
