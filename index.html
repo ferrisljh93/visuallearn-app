@@ -28,7 +28,7 @@
       </div>
       <p id="authMsg" class="msg" role="status"></p>
     </form>
-    <p class="fineprint">Live AI analysis of uploaded documents is <strong>not enabled</strong> in this build. The study journey uses pre-verified content, labelled as such.</p>
+    <p class="fineprint">Live AI analysis of uploaded documents is <strong>not enabled for general accounts</strong> in this build; the study journey uses pre-verified content, labelled as such. A restricted owner-testing mode (real ingestion + unqualified development tutor) exists for allowlisted test accounts only.</p>
   </section>
 </main>
 
@@ -41,6 +41,7 @@
       <a href="#/today" data-route="today">Today</a>
       <a href="#/library" data-route="library">Library</a>
       <a href="#/upload" data-route="upload">Upload</a>
+      <a href="#/documents" data-route="documents">Documents (owner testing)</a>
       <p class="nav-group">Study</p>
       <a href="#/study" data-route="study">Study Workspace</a>
       <a href="#/map" data-route="map">Topic Map</a>
@@ -67,6 +68,7 @@
     <section id="view-today" class="view"></section>
     <section id="view-library" class="view"></section>
     <section id="view-upload" class="view"></section>
+    <section id="view-documents" class="view"></section>
     <section id="view-study" class="view"></section>
     <section id="view-map" class="view"></section>
     <section id="view-lab" class="view"></section>
@@ -76,7 +78,7 @@
     <section id="view-settings" class="view"></section>
 
     <footer class="foot muted small">
-      VisualLearn testing build. Live AI processing and payments are disabled. Uploads are <strong>recorded by name and size only</strong> — the file itself is not stored, not indexed and not analysed in this build.
+      VisualLearn testing build. Payments are disabled. For general accounts, uploads are <strong>recorded by name and size only</strong> — the file itself is not stored, not indexed and not analysed. <strong>Owner test accounts only:</strong> real PDF ingestion and a development tutor (unqualified — Gate T paused) are enabled in restricted mode under Documents; the tutor never receives private documents in this mode.
     </footer>
   </div>
 
@@ -96,6 +98,9 @@
 <script src="js/fsrs.js"></script>
 <script src="js/store.js"></script>
 <script src="js/labs.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script>if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";</script>
+<script src="js/documents.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

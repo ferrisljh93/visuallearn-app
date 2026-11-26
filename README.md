@@ -36,10 +36,21 @@ owner's approval of 24 Nov 2026 at S$0 expenditure.
 
 ## Honest limits of this build
 
-- **Live AI processing is DISABLED.** Uploads record file name/size against
-  the user's account; content is not analysed and no topics/questions are
-  generated from uploads. The UI says so in place. Study content is the
-  pre-verified demo set and is labelled **PRE-VERIFIED**.
+- **Live AI processing is DISABLED for general accounts.** Uploads record
+  file name/size against the user's account; content is not analysed and
+  no topics/questions are generated from uploads. The UI says so in place.
+  Study content is the pre-verified demo set and is labelled
+  **PRE-VERIFIED**.
+- **§32 restricted owner-testing mode (built, deployment pending the
+  owner-session steps in `supabase/DEPLOY-RUNBOOK-32.md`):** real PDF
+  ingestion (private Storage → Edge-Function extraction → coverage
+  record → chapter-aware index), an in-product PDF viewer with coverage
+  display and citation navigation, persistent conversations, and the
+  retained tutor behind a server-enforced allowlist + feature flag —
+  owner test accounts only, synthetic/public-domain/licensed documents
+  only (the tutor function refuses private documents), honestly
+  labelled **UNQUALIFIED DEVELOPMENT BUILD**. See `supabase/schema-v2.sql`
+  and `supabase/functions/`.
 - **Payments do not exist** in this build (no checkout code at all).
 - Both stay off until their existing acceptance gates pass.
 

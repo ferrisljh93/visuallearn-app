@@ -71,7 +71,7 @@
   });
 
   /* ---------------- routing ---------------- */
-  var TITLES = { today: "Today", library: "Library", upload: "Upload", study: "Study Workspace", map: "Topic Map", lab: "Visual Lab", practice: "Practice", flashcards: "Flashcards", weaknesses: "Weaknesses", settings: "Settings" };
+  var TITLES = { today: "Today", library: "Library", upload: "Upload", documents: "Documents — owner testing", study: "Study Workspace", map: "Topic Map", lab: "Visual Lab", practice: "Practice", flashcards: "Flashcards", weaknesses: "Weaknesses", settings: "Settings" };
   function route() {
     var r = (location.hash || "#/today").replace("#/", "") || "today";
     if (!TITLES[r]) r = "today";
@@ -79,7 +79,7 @@
     $("#view-" + r).classList.add("active");
     $("#viewTitle").textContent = TITLES[r];
     $all("[data-route]").forEach(function (a) { a.classList.toggle("active", a.getAttribute("data-route") === r); });
-    ({ today: vToday, library: vLibrary, upload: vUpload, study: vStudy, map: vMap, lab: vLab, practice: vPractice, flashcards: vFlashcards, weaknesses: vWeak, settings: vSettings })[r]();
+    ({ today: vToday, library: vLibrary, upload: vUpload, documents: function () { if (window.VL_DOCS) VL_DOCS.render($("#view-documents")); }, study: vStudy, map: vMap, lab: vLab, practice: vPractice, flashcards: vFlashcards, weaknesses: vWeak, settings: vSettings })[r]();
     window.scrollTo(0, 0);
   }
   window.addEventListener("hashchange", route);
